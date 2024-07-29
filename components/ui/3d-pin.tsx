@@ -18,7 +18,7 @@ export const PinContainer = ({
   containerClassName?: string;
 }) => {
   const [transform, setTransform] = useState(
-    "translate(-50%,-50%) rotateX(0deg)"
+    "translate(-50%,-50%) rotateX(0deg)",
   );
 
   const onMouseEnter = () => {
@@ -29,14 +29,18 @@ export const PinContainer = ({
   };
 
   return (
-    <Link
+    <div
       className={cn(
         "relative group/pin z-50  cursor-pointer",
-        containerClassName
+        containerClassName,
       )}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
-      href={href || "/"}
+      // href={href || "/"}
+      onClick={(event) => {
+        event.preventDefault();
+        window.open("https://" + href, "_blank");
+      }}
     >
       <div
         style={{
@@ -55,7 +59,7 @@ export const PinContainer = ({
         </div>
       </div>
       <PinPerspective title={title} href={href} />
-    </Link>
+    </div>
   );
 };
 
